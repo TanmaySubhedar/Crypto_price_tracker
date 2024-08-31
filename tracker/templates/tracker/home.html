@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Price Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Crypto Price Tracker</h1>
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Coin</th>
+                        <th>Symbol</th>
+                        <th>Current Price</th>
+                        <th>Market Cap</th>
+                        <th>24h Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for coin in crypto_data %}
+                    <tr>
+                        <td>{{ coin.name }}</td>
+                        <td>{{ coin.symbol|upper }}</td>
+                        <td>${{ coin.current_price }}</td>
+                        <td>${{ coin.market_cap }}</td>
+                        <td>{{ coin.price_change_percentage_24h }}%</td>
+                        <td>
+                            <a href="{% url 'chart' coin.id %}" class="button is-link is-small">See Chart</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>
